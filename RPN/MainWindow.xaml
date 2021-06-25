@@ -1,0 +1,87 @@
+﻿<Window x:Class="RPN.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RPN" xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="RPN by Sergo" Height="700" Width="800">
+
+    <Grid Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="Введите уравнение y=" FontSize="20" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <TextBox Margin="-33,3,33,11" Name="inputData"></TextBox>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="Введите шаг, начало и конец" FontSize="20" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBox Margin="28,3,350,11" Name="step"></TextBox>
+            <TextBox Margin="188,3,190,11" Name="begin"></TextBox>
+            <TextBox Margin="348,3,30,11" Name="end"></TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Content="Посчитать" Margin="10,0,-490,0" Click="GetResult"></Button>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <TextBlock Text="Результат в ОПЗ:" FontSize="20" HorizontalAlignment="Center" Margin="0,6,0,-6"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <TextBlock x:Name="resultRPN" Margin="-51,6,51,28" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Border DockPanel.Dock="Top" MaxHeight="100">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="161*"/>
+                        <ColumnDefinition Width="198*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="allResultes" ColumnWidth="*" Grid.ColumnSpan="3" Margin="0,-36,-514,15"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="5" Visibility="Hidden" Name="graph" >
+            <oxy:Plot Title="График" Margin="0,-23,-491,0">
+                <oxy:Plot.Series>
+                    <oxy:LineSeries Title=""
+                            ItemsSource="{Binding TestPoints}"
+                            Color="Black" />
+                </oxy:Plot.Series>
+                <oxy:Plot.Axes>
+                    <oxy:LinearAxis Title="X"
+                            MajorGridlineStyle="Dash"
+                            Position="Bottom" />
+                    <oxy:LinearAxis Title="Y"
+                            MajorGridlineStyle="Dash"
+                            Position="Left" />
+                </oxy:Plot.Axes>
+            </oxy:Plot>
+        </Grid>
+
+    </Grid>
+</Window>
